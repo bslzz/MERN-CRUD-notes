@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+  //REGISTER ROUTE
   register: async (req, res) => {
     try {
       const { username, email, password } = req.body;
@@ -38,6 +39,7 @@ module.exports = {
       res.status(500).json({ msg: error.message });
     }
   },
+  //LOGIN ROUTE
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -65,6 +67,24 @@ module.exports = {
       });
 
       res.json({ token });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  // verify token
+  verifiedToken: (req, res) => {
+    try {
+      const token = req.header('Authorization');
+      if (!token) return res.send(false);
+
+      jwt.verify(token, process.env.JWT_SECRET, async (err, verified) => {
+        if (err) return res.send(false);
+        const user = await User.findById(verified.id);
+        if (!user) return res.send(false);
+
+        return res.send(true);
+      });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
