@@ -7,10 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.json('Hello from express');
-});
+//Routes
+app.use('/users', require('./routes/userRouter'));
+app.use('/notes', require('./routes/noteRouter'));
 
+//Listen server
 const PORT = process.env.PORT;
-
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
