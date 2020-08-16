@@ -36,7 +36,7 @@ module.exports = {
       const savedUser = await newUser.save();
       res.json(savedUser);
     } catch (error) {
-      res.status(500).json({ msg: error.message });
+      return res.status(500).json({ msg: error.message });
     }
   },
   //LOGIN ROUTE
@@ -68,7 +68,7 @@ module.exports = {
 
       res.json({ token });
     } catch (error) {
-      res.status(500).json({ msg: error.message });
+      return res.status(500).json({ msg: error.message });
     }
   },
 
@@ -86,7 +86,7 @@ module.exports = {
         return res.send(true);
       });
     } catch (error) {
-      res.status(500).json({ msg: error.message });
+      return res.status(500).json({ msg: error.message });
     }
   },
 };
