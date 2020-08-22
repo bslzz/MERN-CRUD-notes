@@ -7,7 +7,7 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(false);
   return (
     <>
-      {isLogin ? <Notes /> : <Login />}
+      {isLogin ? <Notes /> : <Login setIsLogin={setIsLogin} />}
       <Register />
     </>
   );
