@@ -3,11 +3,35 @@ import axios from 'axios';
 
 const Login = ({ setIsLogin }) => {
   const [user, setUser] = useState({
+    username: '',
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
-  const { email, password } = user;
+
+  const { username, email, password } = user;
+  const registerHandler = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+    setError('');
+  };
+
+  const registerSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('/users/register', {
+        username,
+        email,
+        password,
+      });
+      setUser({ username: '', email: '', password: '' });
+      setError(res.data.msg);
+    } catch (error) {
+      error.response.data.msg && setError(error.response.data.msg);
+    }
+  };
 
   const loginHandler = (e) => {
     setUser({
@@ -30,11 +54,16 @@ const Login = ({ setIsLogin }) => {
     }
   };
 
+  const [onLogin, setOnLogin] = useState(false);
+  const style = {
+    visibility: onLogin ? 'visible' : 'hidden',
+    opacity: onLogin ? 1 : 0,
+  };
   return (
-    <section>
-      <h3>{error}</h3>
-      <div className="login">
+    <section className="login-page">
+      <div className="login create-note">
         <h2>Login</h2>
+        <h3>{error}</h3>
         <form onSubmit={loginSubmit}>
           <input
             type="email"
@@ -52,7 +81,40 @@ const Login = ({ setIsLogin }) => {
           />
           <button>Login</button>
           <p>
-            Don't have an account? <span>Register here</span>
+            Don't have an account?{' '}
+            <span onClick={() => setOnLogin(true)}>Register here</span>
+          </p>
+        </form>
+      </div>
+      <div className="register create-note" style={style}>
+        <h2>Register</h2>
+        <h3>{error}</h3>
+        <form onSubmit={registerSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={username}
+            onChange={registerHandler}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={registerHandler}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={registerHandler}
+          />
+          <button>Register</button>
+          <p>
+            Already have an account?{' '}
+            <span onClick={() => setOnLogin(false)}>Login here</span>
           </p>
         </form>
       </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Notes from './components/Notes';
-import Register from './components/Register';
 import axios from 'axios';
 
 const App = () => {
@@ -29,10 +28,7 @@ const App = () => {
       {isLogin ? (
         <Notes setIsLogin={setIsLogin} />
       ) : (
-        <>
-          <Login setIsLogin={setIsLogin} />
-          <Register />
-        </>
+        <Login setIsLogin={setIsLogin} />
       )}
     </>
   );
