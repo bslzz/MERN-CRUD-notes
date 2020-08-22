@@ -10,11 +10,13 @@ const Notes = ({ setIsLogin }) => {
     <Router>
       <div className="notes-page">
         <Header setIsLogin={setIsLogin} />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/create" component={CreateNote} />
-          <Route path="/edit/:id" component={EditNote} />
-        </Switch>
+        <section>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/create" component={CreateNote} />
+            <Route path="/edit/:id" component={EditNote} />
+          </Switch>
+        </section>
       </div>
     </Router>
   );
