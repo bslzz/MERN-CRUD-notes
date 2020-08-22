@@ -26,8 +26,14 @@ const App = () => {
 
   return (
     <>
-      {isLogin ? <Notes /> : <Login setIsLogin={setIsLogin} />}
-      <Register />
+      {isLogin ? (
+        <Notes setIsLogin={setIsLogin} />
+      ) : (
+        <>
+          <Login setIsLogin={setIsLogin} />
+          <Register />
+        </>
+      )}
     </>
   );
 };
