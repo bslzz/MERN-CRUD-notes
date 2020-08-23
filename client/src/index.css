@@ -185,6 +185,7 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: rgb(63, 9, 63);
 }
 .login-page h2,
 .login-page h3 {

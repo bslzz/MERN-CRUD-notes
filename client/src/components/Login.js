@@ -10,6 +10,8 @@ const Login = ({ setIsLogin }) => {
   const [error, setError] = useState('');
 
   const { username, email, password } = user;
+
+  // REGISTER HANDLER
   const registerHandler = (e) => {
     setUser({
       ...user,
@@ -33,6 +35,7 @@ const Login = ({ setIsLogin }) => {
     }
   };
 
+  // LOGIN HANDLER
   const loginHandler = (e) => {
     setUser({
       ...user,
