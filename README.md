@@ -4,6 +4,4 @@
 
 ### link to the project
 
-`https://createnotes.herokuapp.com/`
-
-#### thanks to dev AT
+https://createnotes.herokuapp.com
